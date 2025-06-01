@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.10.xsd">
+
+  <include file="config/liquibase/changelog/20251701122260_created_user_table.xml"
+    relativeToChangelogFile="false"/>
+  <include file="config/liquibase/changelog/20252001011026_added_authority_entity.xml"
+    relativeToChangelogFile="false"/>
+  <include file="config/liquibase/changelog/20252101102334_added_userAuthority_entity.xml"
+    relativeToChangelogFile="false"/>
+  <include
+    file="config/liquibase/changelog/20252101212832_add_authority_user_and_user_authority_csv.xml"
+    relativeToChangelogFile="false"/>
+  <include
+    file="config/liquibase/changelog/20250603062260_created_file_upload_table.xml"
+    relativeToChangelogFile="false"/>
+
+</databaseChangeLog>
