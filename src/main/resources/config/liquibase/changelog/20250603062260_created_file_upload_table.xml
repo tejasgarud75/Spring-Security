@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+  <changeSet id="20250603062260" author="Tejas">
+    <createTable tableName="file_upload">
+      <column name="id" type="BIGINT" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="photo_url" type="TEXT"/>
+
+      <!-- Audit Fields -->
+      <column name="created_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+      <column name="created_by" type="BIGINT"/>
+      <column name="updated_at" type="TIMESTAMP"/>
+      <column name="updated_by" type="BIGINT"/>
+      <column name="active" type="boolean">
+        <constraints nullable="true"/>
+      </column>
+    </createTable>
+
+    <addForeignKeyConstraint
+      baseTableName="file_upload"
+      baseColumnNames="created_by"
+      constraintName="fk_photos_created_by"
+      referencedTableName="users"
+      referencedColumnNames="id"
+      onDelete="CASCADE"/>
+
+    <addForeignKeyConstraint
+      baseTableName="file_upload"
+      baseColumnNames="updated_by"
+      constraintName="fk_photos_updated_by"
+      referencedTableName="users"
+      referencedColumnNames="id"
+      onDelete="SET NULL"/>
+  </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,2 @@
+id,u_name,email,password,mobile,created_at,created_by,updated_at,updated_by,first_name,last_name,active
+1,admin,admin@gmail.com,$2a$10$D6eM6TF.wBZt54RzAOxypuyMIY6KIgbhvtPetN5unPokNKM5ojJJu,9876543210,2024-09-30 12:34:56,,,,admin,admin,true

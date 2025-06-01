@@ -1,0 +1,41 @@
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+  <changeSet id="20252101212832" author="Tejas">
+    <loadData tableName="authority" file="config/liquibase/data/authority.csv">
+      <column name="name" type="VARCHAR(255)"/>
+    </loadData>
+  </changeSet>
+
+  <changeSet id="20252101212832-1" author="Tejas">
+    <loadData
+      file="config/liquibase/data/user.csv"
+      tableName="users">
+      <column name="id" type="NUMERIC"/>
+      <column name="u_name" type="STRING"/>
+      <column name="email" type="STRING"/>
+      <column name="password" type="STRING"/>
+      <column name="mobile" type="STRING"/>
+      <column name="created_at" type="DATETIME"/>
+      <column name="created_by" type="NUMERIC"/>
+      <column name="updated_at" type="DATETIME"/>
+      <column name="updated_by" type="NUMERIC"/>
+      <column name="first_name" type="STRING"/>
+      <column name="last_name" type="STRING"/>
+      <column name="active" type="BOOLEAN"/>
+    </loadData>
+  </changeSet>
+
+  <changeSet id="20252101212832-2" author="Tejas">
+    <loadData
+      file="config/liquibase/data/user_authority.csv"
+      tableName="user_authority">
+      <column name="user_id" type="NUMERIC"/>
+      <column name="authority_name" type="STRING"/>
+    </loadData>
+  </changeSet>
+
+</databaseChangeLog>
