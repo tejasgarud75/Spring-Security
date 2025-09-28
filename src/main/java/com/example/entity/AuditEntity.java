@@ -1,5 +1,7 @@
 package com.example.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
@@ -15,20 +17,17 @@ import java.time.LocalDateTime;
 @Data
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
+@JsonIgnoreProperties({"createdBy","updatedBy"})
 public abstract class AuditEntity {
 
   @Column(name = "created_at", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
   private LocalDateTime createdAt;
 
-  @CreatedBy
-  @ManyToOne
-  @JoinColumn(name = "created_by", referencedColumnName = "id")
-  private User createdBy;
+  @Column(name = "created_by")
+  private Long createdById;
 
-  @LastModifiedBy
-  @ManyToOne
-  @JoinColumn(name = "updated_by", referencedColumnName = "id", nullable = true)
-  private User updatedBy;
+  @Column(name = "updated_by")
+  private Long updatedById;
 
   @Column(name = "updated_at", nullable = true)
   @LastModifiedDate
@@ -48,44 +47,5 @@ public abstract class AuditEntity {
     this.updatedAt = LocalDateTime.now();
   }
 
-  public LocalDateTime getCreatedAt() {
-    return createdAt;
-  }
-
-  public void setCreatedAt(LocalDateTime createdAt) {
-    this.createdAt = createdAt;
-  }
-
-  public LocalDateTime getUpdatedAt() {
-    return updatedAt;
-  }
-
-  public void setUpdatedAt(LocalDateTime updatedAt) {
-    this.updatedAt = updatedAt;
-  }
-
-  public Boolean getActive() {
-    return active;
-  }
-
-  public void setActive(Boolean active) {
-    this.active = active;
-  }
-
-  public User getCreatedBy() {
-    return createdBy;
-  }
-
-  public void setCreatedBy(User createdBy) {
-    this.createdBy = createdBy;
-  }
-
-  public User getUpdatedBy() {
-    return updatedBy;
-  }
-
-  public void setUpdatedBy(User updatedBy) {
-    this.updatedBy = updatedBy;
-  }
 }
 

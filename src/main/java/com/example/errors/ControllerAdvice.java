@@ -21,6 +21,17 @@ public class ControllerAdvice {
             request.getRequestURI()));
   }
 
+  @ExceptionHandler(ProductNotFoundException.class)
+  public ResponseEntity<ExceptionResponse> handleProductNotFoundException(
+          ProductNotFoundException ex, HttpServletRequest request) {
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+            .body(new ExceptionResponse(LocalDateTime.now(),
+                    HttpStatus.BAD_REQUEST.value(),
+                    HttpStatus.BAD_REQUEST.getReasonPhrase(),
+                    ex.getMessage(),
+                    request.getRequestURI()));
+  }
+
   @ExceptionHandler(Exception.class)
   public ResponseEntity<ExceptionResponse> handleGenericException(
       Exception ex, HttpServletRequest request) {

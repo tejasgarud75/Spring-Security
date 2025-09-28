@@ -42,6 +42,6 @@ Password: admin
 
 Use the following curl command to retrieve a JWT access token:
 
-curl -X GET "http://localhost:8080/authenticate?userName=admin&password=admin"
+curl -X GET "http://localhost:8085/api/authenticate?userName=admin&password=admin" 
 This will return a JWT token which must be included in the Authorization header as a Bearer token for accessing secured APIs.
 

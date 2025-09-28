@@ -4,6 +4,7 @@ package com.example.service;
 import com.example.entity.Authority;
 import com.example.entity.User;
 import com.example.errors.BadRequestAlertException;
+import com.example.errors.UserNotFoundException;
 import com.example.repository.UserRepository;
 import com.example.security.AuthoritiesConstants;
 import com.example.security.jwt.JWTFilter;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -76,8 +78,19 @@ public class UserService {
     }
     User entity = mapper.toEntity(userDTO);
     entity.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-    entity.setAuthorities(Set.of(new Authority(AuthoritiesConstants.USER)));
+    entity.setAuthorities(Set.of(new Authority(AuthoritiesConstants.USER)));  // Set authority as user
     return mapper.toDto(userRepository.save(entity));
+  }
+
+  public User getCurrentUser() {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    if (authentication == null || !authentication.isAuthenticated()) {
+      throw new SecurityException("No authenticated user found");
+    }
+
+    String username = authentication.getName();
+    return userRepository.findByUserName(username)
+            .orElseThrow(() -> new UserNotFoundException("User not found: " + username));
   }
 
 }

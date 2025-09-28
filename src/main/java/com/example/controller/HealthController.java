@@ -1,6 +1,5 @@
 package com.example.controller;
 
-import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,15 +22,5 @@ public class HealthController {
         return "Health okay";
     }
 
-    @GetMapping("/mono")
-    public Mono<String> getMono() throws InterruptedException {
-        //   Thread.sleep(5000);
-        return Mono.just("Hello from Mono!");
-    }
-
-    @GetMapping("/flux")
-    public Flux<String> getFlux() {
-        return Flux.just("Spring", "Boot", "Reactive", "WebFlux");
-    }
 }
 
